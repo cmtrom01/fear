@@ -23,6 +23,21 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private String[] pictureFiles = new String[]{"img/circle.png", "img/triangle.png", "img/square.png", "img/circle.png", "img/triangle.png", "img/square.png", "img/circle.png", "img/triangle.png", "img/square.png", "img/circle.png", "img/triangle.png", "img/square.png", "img/circle.png", "img/triangle.png", "img/square.png", "img/circle.png", "img/triangle.png", "img/square.png", "img/circle.png", "img/triangle.png"};
     private String[] pictureFilesC = new String[]{"/square.png", "/triangle.png", "/square.png", "/triangle.png", "/square.png", "/triangle.png", "/square.png", "/square.png", "/triangle.png", "/square.png"};
+
+    //fattyfoods
+    //veggies
+    //trialone
+
+    //officesupplies
+    //nonoffice supplies
+    //trialsix
+
+    //trialarray = new Array[tr1, tr2, tr3, ...., tr6]
+
+
+
+
+
     private MediaPlayer mediaPlayer;
     private String[][] outputString = new String[3][70];
     private int counterOutputStringTime = 0;
@@ -39,6 +54,24 @@ public class Main extends Application {
     }
 
     public void start(final Stage primaryStage) throws Exception {
+
+        //for loop here too for trials (if wanted)
+
+        //if(newTrial){
+        //if(len(trialArr) == 0)
+        //  break
+        //
+        //get rand numb from 1 to len(trialarray) call it randNum
+        //currTrial = trialArr[randNum]
+        //remove from trialArray
+        //newTrial = false
+        //
+        //
+        //}
+        //
+
+        //for loop start to loop through trialarr five times
+
         this.timeStart = (double)System.currentTimeMillis();
         Random rand = new Random();
         File directory = new File("./");
@@ -93,9 +126,25 @@ public class Main extends Application {
 
                 }
 
-                if(false) {
-                    canChange = true;
+
+                /*
+
+                if(canChange) {
+                currArr = trialArr
+                randNum = rand(1, len(currArr))
+                currArr[randNum]
+                remove(currArr, randNum) - i.e. remove element from array
+
+                if(loop is iteration is done) {
+
+                currArr = trialArr
+
                 }
+
+                }
+
+                 */
+
 
                 if(canChange) {
                     Main.this.finishCounter++;
