@@ -34,7 +34,7 @@ public class Main extends Application {
     private int n = 0;
     private boolean canScream;
     private String inputNextString;
-
+    private boolean canChange = true;
     public Main() {
     }
 
@@ -60,7 +60,44 @@ public class Main extends Application {
         this.m = rand.nextInt(3);
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
-                if (ke.getCode() == KeyCode.SPACE) {
+                if (ke.getCode() == KeyCode.UP) {
+
+                    imageView.setFitHeight(imageView.getFitHeight() + 10.0D);
+
+                    if(imageView.getFitHeight() >= 865.0) {
+                        canChange = true;
+                    }
+
+                } else if(ke.getCode() == KeyCode.DOWN) {
+                    imageView.setFitHeight(imageView.getFitHeight() - 10.0D);
+
+                    if(imageView.getFitHeight() <= 140.0) {
+                        canChange = true;
+                    }
+
+                } else if(ke.getCode() == KeyCode.LEFT) {
+                    imageView.setFitWidth(imageView.getFitWidth() - 10.0D);
+                    System.out.println(imageView.getFitWidth());
+                    if(imageView.getFitWidth() <= 110.0) {
+                        canChange = true;
+                    }
+
+
+                } else if(ke.getCode() == KeyCode.RIGHT) {
+                    imageView.setFitWidth(imageView.getFitWidth() + 10.0D);
+                    System.out.println(imageView.getFitWidth());
+                    if(imageView.getFitWidth() >= 1150.0) {
+                        canChange = true;
+                    }
+
+
+                }
+
+                if(false) {
+                    canChange = true;
+                }
+
+                if(canChange) {
                     Main.this.finishCounter++;
                     if (Main.this.m == 1) {
                         Main.this.mediaPlayer.stop();
@@ -144,11 +181,17 @@ public class Main extends Application {
 
                         primaryStage.close();
                     }
+
+                    canChange  = false;
                 }
 
             }
         });
         primaryStage.show();
+    }
+
+    public void goToNextImage(String path, Stage primaryStage) {
+
     }
 
     public static void main(String[] args) {
