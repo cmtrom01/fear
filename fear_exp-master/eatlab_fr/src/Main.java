@@ -55,6 +55,7 @@ public class Main extends Application {
     private String inputNextString;
     private boolean canChange = true;
     private String picture;
+    int k = 0;
     public Main() {
     }
 
@@ -62,9 +63,13 @@ public class Main extends Application {
         randomizeArrays(trialarray);
 
         for (int l=0; l<trialarray.length; l++) {
+            System.out.println("l" + l);
+
             String[] currentTrial = trialarray[l];
 
             for (int j = 0; j < 5; j++) {
+                k = 0;
+                System.out.println("j" + j);
                 randomize(currentTrial);
                 this.timeStart = (double)System.currentTimeMillis();
                 Random rand = new Random();
@@ -87,9 +92,10 @@ public class Main extends Application {
                 Scene scene = new Scene(hbox, 500.0D, 500.0D);
                 primaryStage.setScene(scene);
                 this.m = rand.nextInt(3);
+                primaryStage.show();
+                 System.out.println("k" + k);
 
-                for (int k = 0; k < currentTrial.length; k++) {
-                    Main.this.picture = currentTrial[k];
+                    System.out.println(currentTrial[k]);
                     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
                         public void handle(KeyEvent ke) {
                             if (ke.getCode() == KeyCode.UP) {
@@ -111,127 +117,40 @@ public class Main extends Application {
 
                             }
 
-                            /*if (ke.getCode() == KeyCode.UP) {
-
-                                imageView.setFitHeight(imageView.getFitHeight() + 10.0D);
-
-                                if (imageView.getFitHeight() >= 865.0) {
-                                    canChange = true;
-                                }
-
-                            } else if (ke.getCode() == KeyCode.DOWN) {
-                                imageView.setFitHeight(imageView.getFitHeight() - 10.0D);
-
-                                if (imageView.getFitHeight() <= 140.0) {
-                                    canChange = true;
-                                }
-
-                            } else if (ke.getCode() == KeyCode.LEFT) {
-                                imageView.setFitWidth(imageView.getFitWidth() - 10.0D);
-                                System.out.println(imageView.getFitWidth());
-                                if (imageView.getFitWidth() <= 110.0) {
-                                    canChange = true;
-                                }
-
-
-                            } else if (ke.getCode() == KeyCode.RIGHT) {
-                                imageView.setFitWidth(imageView.getFitWidth() + 10.0D);
-                                System.out.println(imageView.getFitWidth());
-                                if (imageView.getFitWidth() >= 1150.0) {
-                                    canChange = true;
-                                }
-                            }*/
-
+                            System.out.println(canChange);
                             if (canChange) {
-                                Main.this.finishCounter++;
-                                if (Main.this.m == 1) {
-                                    Main.this.mediaPlayer.stop();
-                                    Main.this.m = 0;
-                                }
+
 
                                 double reactionTime = ((double) System.currentTimeMillis() - Main.this.timeStart) / 1000.0D;
-                                Main.this.outputString[1][Main.this.counterOutputStringTime] = Double.toString(reactionTime);
-                                Main.this.counterOutputStringTime++;
-                                Main.this.timeStart = (double) System.currentTimeMillis();
-                                Main.this.timerCounter++;
-                                if (Main.this.n < 19) {
-                                    Main.this.n = Main.this.n + 1;
-                                } else {
-                                    Main.this.n = 0;
-                                }
+
 
                                 Object var4 = null;
 
                                 try {
-                                    new FileInputStream(picture);
-                                    Main.this.inputNextString = picture;
+                                    new FileInputStream(currentTrial[k]);
+                                    Main.this.inputNextString = currentTrial[k];
                                 } catch (FileNotFoundException var12) {
-                                    var12.printStackTrace();
+
                                 }
 
-                                Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(picture));
+                                Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(currentTrial[k]));
+                                k++;
                                 imageView.setImage(image);
                                 imageView.setFitHeight(455.0D);
                                 imageView.setFitWidth(500.0D);
-                                if (Main.this.finishCounter < 10) {
-                                    Main.this.canScream = false;
-                                } else if (Main.this.finishCounter < 20) {
-                                    Main.this.canScream = true;
-                                } else if (Main.this.finishCounter < 30) {
-                                    Main.this.canScream = false;
-                                } else if (Main.this.finishCounter < 40) {
-                                    Main.this.canScream = true;
-                                } else if (Main.this.finishCounter < 50) {
-                                    Main.this.canScream = false;
-                                } else if (Main.this.finishCounter < 60) {
-                                    Main.this.canScream = true;
-                                } else if (Main.this.finishCounter < 70) {
-                                    Main.this.canScream = false;
-                                }
 
-                                if (Main.this.canScream) {
-                                    if (Main.this.inputNextString.equals("/circle.png")) {
-                                        Main.this.m = 1;
-                                        Media sound = new Media((new File("img/female_scream.wav")).toURI().toString());
-                                        Main.this.mediaPlayer = new MediaPlayer(sound);
-                                        Main.this.mediaPlayer.play();
-                                        Main.this.scream = true;
-                                        Main.this.outputString[0][Main.this.counterOutputStringTime] = "True";
-                                    } else {
-                                        Main.this.outputString[0][Main.this.counterOutputStringTime] = "False";
-                                    }
-                                } else {
-                                    Main.this.outputString[0][Main.this.counterOutputStringTime] = "False";
-                                }
 
-                                if (Main.this.finishCounter == 70) {
-                                    BufferedWriter writer = null;
-                                    try {
-                                        writer = new BufferedWriter(new FileWriter(" out.txt"));
-                                    } catch (IOException var11) {
-                                    }
-
-                                    for (int i = 0; i < 70; ++i) {
-                                        try {
-                                            writer.write(Main.this.outputString[0][i] + " " + Main.this.outputString[1][i] + "\n");
-                                        } catch (IOException var10) {
-                                        }
-                                    }
-
-                                    try {
-                                        writer.close();
-                                    } catch (IOException var9) {
-                                    }
-
-                                    primaryStage.close();
-                                }
 
                                 canChange = false;
+                                primaryStage.show();
                             }
+
+
                         }
                     });
-                }
-                primaryStage.show();
+
+                //primaryStage.show();
+
             }
         }
     }
@@ -257,4 +176,3 @@ public class Main extends Application {
         filesList.toArray(files);
     }
 }
-
