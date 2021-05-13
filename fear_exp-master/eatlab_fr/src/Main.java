@@ -56,16 +56,19 @@ public class Main extends Application {
     private boolean canChange = true;
     private String picture;
     int k = 0;
+    int z = 0;
+    String[] currentTrial;
     public Main() {
     }
 
     public void start(final Stage primaryStage) throws Exception {
         randomizeArrays(trialarray);
 
+
         for (int l=0; l<trialarray.length; l++) {
             System.out.println("l" + l);
 
-            String[] currentTrial = trialarray[l];
+            currentTrial = trialarray[l];
 
             for (int j = 0; j < 5; j++) {
                 k = 0;
@@ -126,11 +129,24 @@ public class Main extends Application {
 
                                 Object var4 = null;
 
-                                try {
-                                    new FileInputStream(currentTrial[k]);
-                                    Main.this.inputNextString = currentTrial[k];
-                                } catch (FileNotFoundException var12) {
+                                if(currentTrial.length > k+1) {
 
+                                    if(trialarray.length > z+1) {
+                                        try {
+                                            new FileInputStream(currentTrial[k]);
+                                            Main.this.inputNextString = currentTrial[k];
+                                        } catch (FileNotFoundException var12) {
+
+
+                                        }
+                                    } else {
+                                        System.out.println("DONE!");
+                                        primaryStage.close();
+                                    }
+                                } else {
+                                    z++;
+                                    currentTrial = trialarray[z];
+                                    k = 0;
                                 }
 
                                 Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(currentTrial[k]));
